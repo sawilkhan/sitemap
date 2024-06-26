@@ -1,0 +1,4 @@
+github.com/sawilkhan/gophercises-html-parser v0.0.0-20240626083118-fe0e6ae524a4 h1:H5hI3YqCcN4pPZtT7sx6LbVFg4o73y9Lbs0kPoKPD2w=
+github.com/sawilkhan/gophercises-html-parser v0.0.0-20240626083118-fe0e6ae524a4/go.mod h1:h+Va1nUTD25BKxJ115P/xPDi2ZoiV8tjdNXczCHljQI=
+golang.org/x/net v0.26.0 h1:soB7SVo0PWrY4vPW/+ay0jKDNScG2X9wFeYlXIvJsOQ=
+golang.org/x/net v0.26.0/go.mod h1:5YKkiSynbBIh3p6iOc/vibscux0x38BZDkn8sCUPxHE=
