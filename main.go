@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 
 	link "github.com/sawilkhan/gophercises-html-parser"
@@ -28,7 +30,18 @@ import (
 	6. print out XML
 */
 
+const xmlns = "https://sitemaps.org/schemas/sitemap/0.9"
+
 var visited map[string]bool = make(map[string]bool)
+
+type loc struct{
+	Value string `xml:"loc"`
+}
+
+type urlset struct{
+	Urls []loc `xml:"url"`
+	Xmlns string `xml:"xmlns,attr"`
+}
 
 func main() {
 	urlFlag := flag.String("url", "https://gophercises.com", "the url you want to build a sitemap for")
@@ -48,16 +61,24 @@ func main() {
 		}
 	}
 	
+	var toXml urlset
+	toXml.Xmlns = xmlns
 	for _, page := range pages{
-		fmt.Println(page)
+		toXml.Urls = append(toXml.Urls, loc{Value: page})
 	}
 
+	enc := xml.NewEncoder(os.Stdout)
+	enc.Indent("", "	")
+	if err := enc.Encode(os.Stdout); err != nil{
+		panic(err)
+	}
 }
+
 
 func get(urlString string) []string{
 	resp, err := http.Get(urlString)
 	if err != nil{
-		panic(err)
+		return []string{}
 	}
 	defer resp.Body.Close()
 
