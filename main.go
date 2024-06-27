@@ -69,7 +69,7 @@ func main() {
 
 	enc := xml.NewEncoder(os.Stdout)
 	enc.Indent("", "	")
-	if err := enc.Encode(os.Stdout); err != nil{
+	if err := enc.Encode(toXml); err != nil{
 		panic(err)
 	}
 }
